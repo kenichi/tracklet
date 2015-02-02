@@ -1,0 +1,11 @@
+:addr: 127.0.0.1
+:channel: tracklet:channel
+:db:
+  :url: postgres://localhost/tracklet
+:mapbox:
+  :access_token: xxx
+  :map_id: yyy
+:port: 4567
+:ws_host: localhost:4567
+
+# vim: ft=yaml

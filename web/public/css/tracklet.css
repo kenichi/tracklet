@@ -1,0 +1,41 @@
+#map-wrapper {
+  float: left;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  width: 640px;
+  min-height: 480px;
+}
+#map {
+  padding: 0;
+  width: 640px;
+  height: 480px;
+}
+
+#controls {
+  float: left;
+  padding: 10px;
+}
+
+.control {
+  padding-bottom: 10px;
+}
+  .control label {
+    padding-left: 5px;
+  }
+  .control ul {
+    padding: 0;
+  }
+  .control li {
+    list-style-type: none;
+    padding-right: 10px;
+  }
+
+input.slider {
+  padding-top: 10px;
+}
+
+#last-event {
+  padding-left: 10px;
+  font-family: inconsolata, monaco, courier, monospace;
+  font-size: 10px;
+}

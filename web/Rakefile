@@ -1,0 +1,61 @@
+desc 'load environment'
+task :env do
+  require_relative './lib/tracklet'
+end
+
+desc 'reset database'
+task db: ['db:drop', 'db:create', :env, 'db:migrate']
+
+desc 'run web server/api'
+task web: [:env] do
+  Tracklet::Base.run!
+end
+
+desc 'irb inside environment with tools'
+task :console do
+  exec 'ruby -rirb -r./lib/tracklet -e "Bundler.require :dev; IRB.start"'
+end
+
+namespace :db do
+
+  desc 'create database'
+  task :create do
+    `createdb tracklet`
+    Rake::Task[:env].invoke
+    Tracklet::DB.run 'CREATE EXTENSION postgis'
+    Tracklet::DB.run 'CREATE EXTENSION postgis_topology'
+  end
+
+  desc 'drop database'
+  task :drop do
+    `dropdb tracklet`
+  end
+
+  desc 'migrate database'
+  task migrate: [:env] do
+    Sequel.extension :migration
+    Sequel::Migrator.apply Tracklet::DB, './lib/migrations'
+  end
+
+  desc 'seed database with 10 random locations and 5 random visits'
+  task :seed => [:db] do
+    ps = Terraformer::Point.new(-122.6764, 45.5165).random_points(15)
+    (0..9).each do |i|
+      vals = ps[i].to_location_hash
+      vals.merge! point: :st.makepoint(ps[i].coordinates.x, ps[i].coordinates.y),
+                  created_at: Time.now.utc
+      Tracklet::DB[:locations].insert vals
+    end
+    (10..14).each do |i|
+      vals = ps[i].to_visit_hash haccuracy: 50
+      if i % 2 == 0
+        vals.merge! arrival_date: Time.now.utc
+      else
+        vals.merge! departure_date: Time.now.utc
+      end
+      vals.merge! point: :st.makepoint(ps[i].coordinates.x, ps[i].coordinates.y)
+      Tracklet::DB[:visits].insert vals
+    end
+  end
+
+end

@@ -1,0 +1,16 @@
+source 'https://rubygems.org'
+
+gem 'angelo', github: 'kenichi/angelo', branch: 'tracklet'
+gem 'celluloid-redis'
+gem 'pg'
+gem 'redis'
+gem 'reel', github: 'celluloid/reel', branch: 'master'
+gem 'sequel'
+gem 'terraformer', github: 'kenichi/terraformer-ruby', branch: 'tracklet'
+
+group :dev do
+  gem 'awesome_print'
+  gem 'httpclient'
+  gem 'pry'
+  gem 'pry-nav'
+end

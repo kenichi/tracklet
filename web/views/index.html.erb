@@ -1,0 +1,79 @@
+<div id="content">
+  <div id="map-wrapper">
+    <div id="map"></div>
+  </div>
+
+  <div id="controls">
+
+    <div class="slider-wrapper control well">
+      <ul>
+        <li class="slider-checkbox">
+          <input type="checkbox"
+                 id="slider-checkbox"
+                 class="slider-checkbox"/>
+          <label for="slider-checkbox">Step</label>
+        </li>
+
+        <li>
+          <input type="radio"
+                 id="locations-step-radio"
+                 name="step-radio"
+                 value="locations"
+                 checked="checked"/>
+          <label for="locations-step-radio">Locations</label>
+        </li>
+
+        <li>
+          <input type="radio"
+                 id="visits-step-radio"
+                 name="step-radio"
+                 value="visits"/>
+          <label for="visits-step-radio">Visits</label>
+        </li>
+
+        <li>
+          <input type="radio"
+                 id="chrono-step-radio"
+                 name="step-radio"
+                 value="chrono"/>
+          <label for="chrono-step-radio">Chrono</label>
+        </li>
+      </ul>
+
+      <div class="slider">
+        <input id="slider" type="range" disabled="disabled"/>
+      </div>
+    </div>
+
+    <div class="control well">
+      <ul>
+        <li>
+          <input type="checkbox" id="streaming-checkbox"/>
+          <label for="streaming-checkbox">Streaming</label>
+        </li>
+        <li>
+          <input type="radio"
+                 id="eventsource-streaming-radio"
+                 name="streaming-radio"
+                 value="eventsource"
+                 checked="checked"/>
+          <label for="eventsource-streaming-radio">EventSource</label>
+        </li>
+        <li>
+          <input type="radio"
+                 id="websocket-streaming-radio"
+                 name="streaming-radio"
+                 value="websocket"/>
+          <label for="websocket-streaming-radio">WebSocket</label>
+        </li>
+      </ul>
+    </div>
+
+    <div class="control well">
+      <label for="last-event">Last Event</label>
+      <br/>
+      <span id="last-event">null</span>
+    </div>
+
+  </div>
+</div>
