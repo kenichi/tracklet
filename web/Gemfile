@@ -6,7 +6,7 @@ gem 'pg'
 gem 'redis'
 gem 'reel', github: 'celluloid/reel', branch: 'master'
 gem 'sequel'
-gem 'terraformer', github: 'kenichi/terraformer-ruby', branch: 'tracklet'
+gem 'terraformer'
 
 group :dev do
   gem 'awesome_print'

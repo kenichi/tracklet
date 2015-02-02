@@ -21,14 +21,6 @@ GIT
       reel (~> 0.5)
       tilt (~> 2.0)
 
-GIT
-  remote: git://github.com/kenichi/terraformer-ruby.git
-  revision: 9010d90c647084c3244da5bb94e4bbe983b2494e
-  branch: tracklet
-  specs:
-    terraformer (0.0.9)
-      launchy (~> 2.4)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -67,6 +59,8 @@ GEM
     redis (3.2.0)
     sequel (4.18.0)
     slop (3.6.0)
+    terraformer (0.1.0)
+      launchy (~> 2.4)
     tilt (2.0.1)
     timers (4.0.1)
       hitimes
@@ -87,4 +81,4 @@ DEPENDENCIES
   redis
   reel!
   sequel
-  terraformer!
+  terraformer
