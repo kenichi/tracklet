@@ -5,7 +5,8 @@ Tracklet is an open source iOS app and webservice for tracking and storing your 
 location. The iOS app requires version 8 or higher and includes support for monitoring
 visits ("frequent locations" or [CLVisit](https://developer.apple.com/library/prerelease/ios/documentation/CoreLocation/Reference/CLVisit_class/index.html)).
 
-The webservice includes a bootstrap-based [Mapbox](https://mapbox.com) view with
+The webservice accepts JSON matching Apple's CLLocation and CLVisit classes, and
+outputs GeoJSON. It includes a bootstrap-framed [Mapbox](https://mapbox.com) view with
 support for streaming updates as they arrive at the server, via WebSocket or
 EventSource. The view allows the user to "step" through locations and/or visits
 with a slider.
