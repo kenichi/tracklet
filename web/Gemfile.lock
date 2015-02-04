@@ -1,7 +1,6 @@
 GIT
   remote: git://github.com/celluloid/reel.git
   revision: b92756dde5f22b114cffae9e51ccaf6196c581ca
-  branch: master
   specs:
     reel (0.6.0)
       celluloid (>= 0.15.1)
@@ -12,8 +11,7 @@ GIT
 
 GIT
   remote: git://github.com/kenichi/angelo.git
-  revision: 9a4179bf85939c5277390313e2e1a9544667cb52
-  branch: tracklet
+  revision: 0efb7bdaa9dd69a33ea6e3220d2ffd64053fb2d0
   specs:
     angelo (0.4.0pre)
       mime-types (~> 2.4)
@@ -28,9 +26,9 @@ GEM
     awesome_print (1.6.1)
     celluloid (0.16.0)
       timers (~> 4.0.0)
-    celluloid-io (0.16.1)
+    celluloid-io (0.16.2)
       celluloid (>= 0.16.0)
-      nio4r (>= 1.0.0)
+      nio4r (>= 1.1.0)
     celluloid-redis (0.0.2)
       celluloid-io (>= 0.13.0.pre)
       redis
@@ -57,9 +55,9 @@ GEM
     pry-nav (0.2.4)
       pry (>= 0.9.10, < 0.11.0)
     redis (3.2.0)
-    sequel (4.18.0)
+    sequel (4.19.0)
     slop (3.6.0)
-    terraformer (0.1.0)
+    terraformer (0.2.0)
       launchy (~> 2.4)
     tilt (2.0.1)
     timers (4.0.1)

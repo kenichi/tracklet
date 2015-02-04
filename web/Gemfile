@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'angelo', github: 'kenichi/angelo', branch: 'tracklet'
+gem 'angelo', github: 'kenichi/angelo'
 gem 'celluloid-redis'
 gem 'pg'
 gem 'redis'
-gem 'reel', github: 'celluloid/reel', branch: 'master'
+gem 'reel', github: 'celluloid/reel'
 gem 'sequel'
 gem 'terraformer'
 
