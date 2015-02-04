@@ -2,11 +2,12 @@ Tracklet
 ========
 
 Tracklet is an open source iOS app and webservice for tracking and storing your own
-location.
+location. The iOS app requires version 8 or higher and includes support for monitoring
+visits ("frequent locations" or [CLVisit](https://developer.apple.com/library/prerelease/ios/documentation/CoreLocation/Reference/CLVisit_class/index.html)).
 
 The webservice includes a bootstrap-based [Mapbox](https://mapbox.com) view with
 support for streaming updates as they arrive at the server, via WebSocket or
-EventSource. Thew view allows the user to "step" through locations and/or visits
+EventSource. The view allows the user to "step" through locations and/or visits
 with a slider.
 
 The iOS app is *very* basic and includes no map views, yet. *wink* Look for UDP
@@ -30,8 +31,9 @@ here are basic instructions for running on your own infrastructure.
 Host requirements:
 
 * postgresql >= 9.2 w/ postgis >= 2.1
-* ruby >= 2.1
 * redis
+* ruby >= 2.1
+
 
 1. `cd tracklet/web`
 2. `bundle install`
