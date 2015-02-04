@@ -34,6 +34,7 @@ Host requirements:
 * redis
 * ruby >= 2.1
 
+Steps to get it running after installing prerequisites:
 
 1. `cd tracklet/web`
 2. `bundle install`
