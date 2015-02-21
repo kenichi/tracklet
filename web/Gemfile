@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'angelo', github: 'kenichi/angelo'
+gem 'angelo', '0.4.1'
 gem 'celluloid-redis'
 gem 'pg'
 gem 'redis'
