@@ -8,14 +8,13 @@
 #import "NetworkManager.h"
 #import "AFNetworking.h"
 #import "DataManager.h"
+#import "Config.h"
 
 @interface NetworkManager ()
 
 @property (strong, nonatomic) AFHTTPRequestOperationManager *rom;
 
 @end
-
-static NSString *const BaseUrl = @"http://example.com/";
 
 @implementation NetworkManager
 
@@ -27,6 +26,19 @@ static NSString *const BaseUrl = @"http://example.com/";
         instance = [self new];
     });
     return instance;
+}
+
+- (NSString *)formatDate:(NSDate *)date {
+    static NSDateFormatter *formatter;
+
+    if (formatter == nil) {
+        formatter = [[NSDateFormatter alloc] init];
+        [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
+        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
+    }
+
+    NSString *formatted = [formatter stringFromDate:date];
+    return formatted;
 }
 
 - (id)init {
@@ -57,7 +69,7 @@ static NSString *const BaseUrl = @"http://example.com/";
     params[@"vertical_accuracy"] = params[@"verticalAccuracy"];
     [params removeObjectForKey:@"verticalAccuracy"];
     
-    params[@"timestamp"] = [params[@"timestamp"] description];
+    params[@"timestamp"] = [self formatDate:location.timestamp];
     
     return params;
 }
@@ -66,12 +78,12 @@ static NSString *const BaseUrl = @"http://example.com/";
     NSMutableDictionary *params = [self dictForManagedObject:visit];
     
     if (params[@"arrivalDate"] != [NSDate distantPast]) {
-        params[@"arrival_date"] = [params[@"arrivalDate"] description];
+        params[@"arrival_date"] = [self formatDate:visit.arrivalDate];
     }
     [params removeObjectForKey:@"arrivalDate"];
     
     if (params[@"departureDate"] != [NSDate distantFuture]) {
-        params[@"departure_date"] = [params[@"departureDate"] description];
+        params[@"departure_date"] = [self formatDate:visit.departureDate];
     }
     [params removeObjectForKey:@"departureDate"];
     

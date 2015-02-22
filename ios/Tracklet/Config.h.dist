@@ -1,0 +1,14 @@
+//
+//  Config.h
+//  Tracklet
+//
+//  Created by Ryan Arana on 2/22/15.
+//  Copyright (c) 2015 io.nakamura. All rights reserved.
+//
+
+#ifndef Tracklet_Config_h
+#define Tracklet_Config_h
+
+static NSString *const BaseUrl = @"http://example.com/";
+
+#endif

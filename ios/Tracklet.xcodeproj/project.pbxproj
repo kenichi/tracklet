@@ -53,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9473DC8C1A9A795B000C7776 /* Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
 		BEC807D31A79C8F800464C3D /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		BEC807D41A79C8F800464C3D /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		BEC807D51A79C8F800464C3D /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -262,6 +263,7 @@
 				BEC807D11A79C8F800464C3D /* AFNetworking */,
 				BEF37A2A1A7DD2E800FC7127 /* MBProgressHud */,
 				BEF848701A09D73700208948 /* Supporting Files */,
+				9473DC8C1A9A795B000C7776 /* Config.h */,
 			);
 			path = Tracklet;
 			sourceTree = "<group>";

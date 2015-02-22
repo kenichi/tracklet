@@ -159,11 +159,11 @@ var Tracklet = function() {
       var pop = f.properties.type + ': ';
       switch (f.properties.type) {
         case 'Location':
-          pop = pop + f.properties.timestamp;
+          pop = pop + new Date(f.properties.timestamp);
           break;
         case 'Visit':
-          pop = pop + "<br/>arrival: " + f.properties.arrival_date +
-                      "<br/>depart: " + f.properties.departure_date;
+          pop = pop + "<br/>arrival: " + new Date(f.properties.arrival_date) +
+                      "<br/>depart: " + new Date(f.properties.departure_date);
           break;
       }
       l.bindPopup(pop);

@@ -34,6 +34,7 @@ module Tracklet
   CHANNEL = CONFIG[:channel]
   REDIS = Redis.new driver: :celluloid
   DB = Sequel.connect CONFIG[:db][:url]
+  Sequel.default_timezone = :utc
 
 end
 
