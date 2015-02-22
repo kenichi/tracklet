@@ -59,7 +59,7 @@ module Tracklet
                  Sequel.as(:st.asgeojson(:st.buffer(:point, :horizontal_accuracy)), :geometry)
       ds.order! Sequel.desc(:timestamp)
       ds.limit! limit
-      ds.all.map! {|l| l.merge! geometry: JSON.parse(l[:geometry])}
+      ds.all.map! {|l| l.merge! type: 'Location', geometry: JSON.parse(l[:geometry])}
     end
 
     def visits
@@ -68,7 +68,7 @@ module Tracklet
                  Sequel.as(:st.asgeojson(:point), :geometry)
       ds.order! Sequel.desc(:arrival_date), Sequel.desc(:departure_date)
       ds.limit! 100
-      ds.all.map! {|v| v.merge! geometry: JSON.parse(v[:geometry])}
+      ds.all.map! {|v| v.merge! type: 'Visit', geometry: JSON.parse(v[:geometry])}
     end
 
     def featurize

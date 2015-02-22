@@ -156,8 +156,16 @@ var Tracklet = function() {
     }
 
     function eachFeature(f, l) {
-      var pop = f.properties.type + ': ' +
-        (f.properties.timestamp || (f.properties.arrival_date || f.properties.departure_date));
+      var pop = f.properties.type + ': ';
+      switch (f.properties.type) {
+        case 'Location':
+          pop = pop + f.properties.timestamp;
+          break;
+        case 'Visit':
+          pop = pop + "<br/>arrival: " + f.properties.arrival_date +
+                      "<br/>depart: " + f.properties.departure_date;
+          break;
+      }
       l.bindPopup(pop);
     }
 
