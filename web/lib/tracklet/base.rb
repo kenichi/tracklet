@@ -45,12 +45,10 @@ module Tracklet
       ds = DB[Sequel.as(sds, :point)]
       ds.select! :st.asgeojson :st.makeline :st.geomfromewkb :point
       ls = ds.first[:st_asgeojson]
-
-      ls = ls.nil? ?
-        Terraformer::LineString.new([]).to_feature :
-        Terraformer.parse(ls).to_feature
-
-      ls.to_json include_bbox: true
+      if ls
+        ls = Terraformer.parse(ls).to_feature
+        ls.to_json include_bbox: true
+      end
     end
 
     def locations limit
@@ -66,7 +64,9 @@ module Tracklet
       ds = DB[:visits]
       ds.select! *VISIT_ATTRS,
                  Sequel.as(:st.asgeojson(:point), :geometry)
-      ds.order! Sequel.desc(:arrival_date), Sequel.desc(:departure_date)
+      # ds.order! Sequel.desc(:arrival_date), Sequel.desc(:departure_date)
+      ds.where! { created_at > (Time.now - 86400) }
+      ds.order! Sequel.desc :created_at
       ds.limit! 100
       ds.all.map! {|v| v.merge! type: 'Visit', geometry: JSON.parse(v[:geometry])}
     end
@@ -114,7 +114,7 @@ module Tracklet
     end
 
     get '/lineString' do
-      line_string
+      line_string or {}
     end
 
     get '/locations' do

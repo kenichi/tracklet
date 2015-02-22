@@ -141,11 +141,11 @@ var Tracklet = function() {
   // --- showing
 
     function showLineStringLayer(fit) {
-      if (lineString.properties.layer) {
+      if (lineString.hasOwnProperty('properties') && lineString.properties.layer) {
         map.removeLayer(lineString.properties.layer);
         lineString.properties.layer = null;
       }
-      if (lineString) {
+      if (lineString && lineString.hasOwnProperty('type')) {
         if (fit && lineString.geometry.bbox) {
           var b = lineString.geometry.bbox;
           map.fitBounds([[b[1], b[0]], [b[3], b[2]]]);
@@ -257,6 +257,7 @@ var Tracklet = function() {
       var i = items[cursor];
       i.properties.layer.setStyle(selectedStyle(i.properties.style));
       map.setView(L.latLng(i.properties.latitude, i.properties.longitude), 16);
+      i.properties.layer.openPopup();
     }
 
     function deselectItem(i) {
