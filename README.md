@@ -81,10 +81,12 @@ server {
 
 #### iOS app
 
-1. open `tracklet/iOS/Tracklet.xcodeproj`
-2. edit `NetworkManager.m`
-3. change `BaseUrl` to where you are running your tracklet webservice
-4. connect your iPhone, select it as a destination, and run!
+1. `cd tracklet/ios/Tracklet`
+2. `cp Config.h.dist Config.h`
+3. open `tracklet/iOS/Tracklet.xcodeproj`
+4. edit `Config.h`
+5. change `BaseUrl` to where you are running your tracklet webservice
+6. connect your iPhone, select it as a destination, and run!
 
 Inside the app, switches turn on and off location and visit monitoring.
 

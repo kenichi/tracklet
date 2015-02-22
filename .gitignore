@@ -16,3 +16,4 @@ xcuserdata
 DerivedData
 *.xcuserstate
 web/config.yml
+ios/Tracklet/Config.h

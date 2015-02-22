@@ -8,14 +8,13 @@
 #import "NetworkManager.h"
 #import "AFNetworking.h"
 #import "DataManager.h"
+#import "Config.h"
 
 @interface NetworkManager ()
 
 @property (strong, nonatomic) AFHTTPRequestOperationManager *rom;
 
 @end
-
-static NSString *const BaseUrl = @"http://example.com/";
 
 @implementation NetworkManager
 
