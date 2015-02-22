@@ -162,8 +162,10 @@ var Tracklet = function() {
           pop = pop + new Date(f.properties.timestamp);
           break;
         case 'Visit':
-          pop = pop + "<br/>arrival: " + new Date(f.properties.arrival_date) +
-                      "<br/>depart: " + new Date(f.properties.departure_date);
+          var ad = 'n/a', dd = 'n/a';
+          if (f.properties.arrival_date) ad = new Date(f.properties.arrival_date);
+          if (f.properties.departure_date) dd = new Date(f.properties.departure_date);
+          pop = pop + "<br/>arrival: " + ad + "<br/>depart: " + dd;
           break;
       }
       l.bindPopup(pop);

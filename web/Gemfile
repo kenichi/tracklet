@@ -4,7 +4,7 @@ gem 'angelo', '0.4.1'
 gem 'celluloid-redis'
 gem 'pg'
 gem 'redis'
-gem 'reel', github: 'celluloid/reel'
+gem 'reel', '0.5.0'
 gem 'sequel'
 gem 'terraformer'
 
