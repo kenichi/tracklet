@@ -79,6 +79,44 @@ server {
 }
 ```
 
+##### POSTing JSON to /location[s] and /visit[s]
+
+The webservice expects JSON at the following POST endpoints:
+
+* /location - one location object
+* /locations - an object with key "locations" : array of location objects
+* /visit - one visit object
+* /visits - an object with key "visits" : array of visit objects
+
+###### Location object
+
+```javascript
+{
+  "longitude": x,
+  "latitude": y,
+  "altitude": a,
+  "horizontal_accuracy": ha,
+  "vertical_accuracy": va,
+  "speed": s,
+  "course": c,
+  "timestamp": ts
+}
+```
+
+###### Visit object
+
+```javascript
+{
+  "longitude": x,
+  "latitude": y,
+  "horizontal_accuracy": ha,
+  "arrival_date": ad,
+  "departure_date": dd
+}
+```
+
+The iOS app handles converting `CLVisit` and `CLLocation` to JSON and POSTing for you.
+
 #### iOS app
 
 1. `cd tracklet/ios/Tracklet`
