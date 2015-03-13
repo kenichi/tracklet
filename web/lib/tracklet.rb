@@ -1,6 +1,7 @@
 require 'bundler'
 Bundler.require
 require 'yaml'
+require 'date'
 
 module Tracklet
 
@@ -22,6 +23,9 @@ module Tracklet
     :arrival_date,
     :departure_date
   ]
+
+  LOCATION_TYPE = 'location'
+  VISIT_TYPE = 'visit'
 
   CONFIG_FILE = File.expand_path '../../config.yml', __FILE__
   begin
@@ -96,3 +100,4 @@ end
 
 $:.unshift File.expand_path('..', __FILE__)
 require 'tracklet/base'
+require 'tracklet/workers'

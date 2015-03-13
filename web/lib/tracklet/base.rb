@@ -1,8 +1,6 @@
 module Tracklet
 
   TYPE = 'type'
-  LOCATION_TYPE = 'location'
-  VISIT_TYPE = 'visit'
   QUEUED = {status: :queued}
 
   class Base < Angelo::Base
@@ -22,19 +20,6 @@ module Tracklet
 
     def attr_params type, from = params
       Tracklet.const_get(type.to_s.upcase + '_ATTRS').reduce({}){|h,k| h[k] = from[k]; h}
-    end
-
-    def insert_prep type, o
-      case type
-      when :location
-        o[:timestamp] = Time.parse(o[:timestamp]).utc
-      when :visit
-        o[:arrival_date] = Time.parse(o[:arrival_date]).utc if o[:arrival_date]
-        o[:departure_date] = Time.parse(o[:departure_date]).utc if o[:departure_date]
-      end
-      o[:created_at] = Time.now.utc
-      o[:point] = :st.makepoint(o[:longitude], o[:latitude])
-      o
     end
 
     def line_string
@@ -113,7 +98,7 @@ module Tracklet
       async :subscribe unless @@subscribed
     end
 
-    get '/lineString' do
+    get '/line_string' do
       line_string or {}
     end
 
@@ -127,35 +112,26 @@ module Tracklet
     end
 
     post '/location' do
-      o = insert_prep :location, attr_params(:location)
-      async :insert_location, o
+      Workers::LocationInsert.perform_async attr_params(:location)
       QUEUED
     end
 
     post '/locations' do
-      ls = params[:locations].map do |l|
-        o = attr_params(:location, l)
-        insert_prep :location, o
-      end
-      async :insert_locations, ls
+      params[:locations].each {|l| Workers::LocationInsert.perform_async attr_params(:location, l)}
       QUEUED
     end
 
     post '/visit' do
-      o = insert_prep :visit, attr_params(:visit)
-      async :insert_visit, o
+      Workers::VisitInsert.perform_async attr_params(:visit)
       QUEUED
     end
 
     post '/visits' do
-      vs = params[:visits].map do |l|
-        insert_prep :visit, attr_params(:visit, l)
-      end
-      async :insert_visits, vs
+      params[:visits].each {|v| Workers::VisitInsert.perform_async attr_params(:visit, v)}
       QUEUED
     end
 
-    # --- pubsub tasks
+    # --- tasks
 
     task :subscribe do
       @@subscribed = true
@@ -167,46 +143,6 @@ module Tracklet
         end
       end
       @@subscribed = false
-    end
-
-    task :publish_feature do |type, id|
-      ds = DB[(type + 's').to_sym]
-      attrs = Tracklet.const_get type.upcase + '_ATTRS'
-      case type
-      when LOCATION_TYPE
-        ds.select! *attrs, Sequel.as(:st.asgeojson(:st.buffer(:point, :horizontal_accuracy)), :geometry)
-      when VISIT_TYPE
-        ds.select! *attrs, Sequel.as(:st.asgeojson(:point), :geometry)
-      end
-      ds.filter! id: id
-      o = ds.first
-      f = Terraformer.parse(o.delete :geometry).to_feature
-      f.properties = o.merge! type: type
-      REDIS.publish CHANNEL, f.to_json
-    end
-
-    # --- database insert tasks
-
-    task :insert_location do |l = {}|
-      id = DB[:locations].insert l
-      async :publish_feature, LOCATION_TYPE, id
-    end
-
-    task :insert_locations do |ls = []|
-      ids = []
-      DB.transaction {ls.each {|l| ids << DB[:locations].insert(l)}}
-      ids.each {|id| async :publish_feature, LOCATION_TYPE, id}
-    end
-
-    task :insert_visit do |v = {}|
-      id = DB[:visits].insert v
-      async :publish_feature, VISIT_TYPE, id
-    end
-
-    task :insert_visits do |vs = []|
-      ids = []
-      DB.transaction {vs.each {|v| ids << DB[:visits].insert(v)}}
-      ids.each {|id| async :publish_feature, VISIT_TYPE, id}
     end
 
   end

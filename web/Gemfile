@@ -6,6 +6,7 @@ gem 'pg'
 gem 'redis'
 gem 'reel', '0.5.0'
 gem 'sequel'
+gem 'sidekiq'
 gem 'terraformer'
 
 group :dev do

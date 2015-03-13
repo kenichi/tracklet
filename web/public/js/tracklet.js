@@ -17,7 +17,7 @@ var Tracklet = function() {
   };
 
   function init() {
-    $.get('lineString', function(json) {
+    $.get('line_string', function(json) {
       lineString = json;
       showLineStringLayer(true);
     });
